@@ -39,14 +39,18 @@ class SalesController < ApplicationController
         @end_date = params[:end_date].to_date
       
         @sales = Sale.where(date: @start_date..@end_date)
+        render json: { message: "sales report successfully generated", sales: @sales }
       end
       
   
     private
   
     def set_sale
-      @sale = Sale.find(params[:id])
+      if params[:id] != 'report'
+        @sale = Sale.find(params[:id])
+      end
     end
+    
   
     def sale_params
       params.require(:sale).permit(:title, :quantity, :amount, :date, :product_id)

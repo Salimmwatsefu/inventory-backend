@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  resources :sales
+  resources :sales do
+    collection do
+      get 'report', to: 'sales#sales_report'
+    end
+  end
+
   resources :products
 
   root to: 'products#index'
-  get '/sales/report', to: 'sales#sales_report'
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
