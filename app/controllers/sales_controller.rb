@@ -1,5 +1,5 @@
 class SalesController < ApplicationController
-    before_action :set_sale, only: [:show, :edit, :update, :destroy]
+    before_action :set_sale, only: [:show, :edit, :destroy]
   
     def index
       @sales = Sale.all
@@ -12,6 +12,7 @@ class SalesController < ApplicationController
   
     def create
       @sale = Sale.new(sale_params)
+      @sale.quantity = params[:quantity]
   
       if @sale.save
         render json: @sale, status: :created, location: @sale
@@ -21,13 +22,7 @@ class SalesController < ApplicationController
     end
 
   
-    def update
-      if @sale.update(sale_params)
-        render json: @sale
-      else
-        render json: @sale.errors, status: :unprocessable_entity
-      end
-    end
+    
   
     def destroy
       @sale.destroy
@@ -35,9 +30,8 @@ class SalesController < ApplicationController
     end
 
     def sales_report
-        @start_date = params[:start_date].to_date
-        @end_date = params[:end_date].to_date
-      
+      @start_date = Date.strptime(params[:start_date], '%m/%d/%Y')
+      @end_date = Date.strptime(params[:end_date], '%m/%d/%Y')
         @sales = Sale.where(date: @start_date..@end_date)
         render json: { message: "sales report successfully generated", sales: @sales }
       end
@@ -53,7 +47,9 @@ class SalesController < ApplicationController
     
   
     def sale_params
-      params.require(:sale).permit(:title, :quantity, :amount, :date, :product_id)
+      params.require(:sale).permit(:id, :title, :quantity, :amount, :date, :product_id)
     end
+  
+    
   end
   

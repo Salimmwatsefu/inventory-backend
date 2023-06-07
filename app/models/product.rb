@@ -3,6 +3,8 @@ class Product < ApplicationRecord
 
   before_save :update_sales_count
 
+  validates :title, uniqueness: true
+
   private
 
   def update_sales_count
