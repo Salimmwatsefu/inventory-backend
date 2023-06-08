@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :employees
   resources :sales do
     collection do
       get 'report', to: 'sales#sales_report'
