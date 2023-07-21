@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_request, only: :show
     skip_before_action :authenticate_request, only: [:create, :login]
   
     def create
