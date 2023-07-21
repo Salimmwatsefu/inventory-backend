@@ -8,5 +8,9 @@ Rails.application.routes.draw do
 
   resources :products
 
-  root to: 'products#index'
+
+  post '/signup', to: 'users#create'
+  get "/me", to: "users#show"
+  post "/login", to: "users#login"
+  delete "/logout", to: "users#destroy"
 end

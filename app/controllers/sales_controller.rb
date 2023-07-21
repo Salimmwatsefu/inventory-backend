@@ -1,5 +1,6 @@
 class SalesController < ApplicationController
     before_action :set_sale, only: [:show, :edit, :destroy]
+    before_action :authenticate_request
   
     def index
       @sales = Sale.all

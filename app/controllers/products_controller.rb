@@ -1,5 +1,6 @@
     class ProductsController < ApplicationController
         before_action :set_product, only: [:show, :edit, :update, :destroy]
+        before_action :authenticate_request
       
         def index
           if params[:title].present?
@@ -46,5 +47,6 @@
         def product_params
           params.require(:product).permit(:title, :instock, :price, :date)
         end
+
       end
       
