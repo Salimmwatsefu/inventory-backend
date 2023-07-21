@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   
     def generate_token(user_id)
       # Generate a token using JWT with an expiration time (e.g., 1 hour from now)
-      secret_key = Rails.application.secrets.secret_key_base
+      secret_key = ENV['SECRET_KEY_BASE']
       expiration_time = 5.hour.from_now.to_i
       payload = { user_id: user_id, exp: expiration_time } # 'exp' is the expiration time attribute
       token = JWT.encode(payload, secret_key, 'HS256')

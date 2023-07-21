@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
     token = request.headers['Authorization']&.split(' ')&.last
     return render json: { errors: ['Authorization token missing'] }, status: :unauthorized unless token
 
-    secret_key = Rails.application.secrets.secret_key_base
+    secret_key = ENV['SECRET_KEY_BASE']
     begin
       decoded_token = JWT.decode(token, secret_key, true, algorithm: 'HS256')
       user_id = decoded_token[0]['user_id']
