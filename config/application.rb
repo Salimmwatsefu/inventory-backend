@@ -26,7 +26,7 @@ module Inventory
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins 'http://localhost:3000', 'https://kuku-hub.vercel.app/' # Add any other allowed origins here
-        resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete,  :options]
+        resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete,  :options], expose: ['Authorization']
       end
     end
 
