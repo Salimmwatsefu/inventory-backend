@@ -7,7 +7,7 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
     allow do
-      origins 'http://localhost:3000', 'https://kuku-hub.vercel.app/' # Add your frontend's origin here
+      origins 'http://localhost:3000', 'https://kuku-hub.vercel.app' # Add your frontend's origin here
       resource '*', headers: :any, methods: [:get, :post, :put, :patch, :delete, :options, :head], expose: ['Authorization'], credentials: true
     end
-  end
+  end 
